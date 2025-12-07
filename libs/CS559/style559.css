@@ -2,15 +2,42 @@
 
 /** We always like to put borders around Canvas and SVG */
 canvas {
-  border: 1px solid black;
+  border: 10px solid black;
+  border-style: inset;
   padding: 0;
   margin: auto;
   display: block;
 }
 
-p {
+div {
+  padding: 5px;
+  border: solid black 5px;
+  background-color: black;
+  display: flex;
+  width: 179px;
+}
+
+label {
+  color: white;
+  font-size: 16pt;
+  background-color: black;
+}
+
+body {
+  background-color: #383434;
+}
+
+[id="scoreText"] {
   text-align: center;
   font-size: 40pt;
+  margin: 10px;
+  color: #c9ab04;
+  display: block;
+}
+
+input {
+  display: block;
+  width: 30px;
 }
 
 svg {

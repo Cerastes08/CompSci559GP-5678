@@ -5,7 +5,7 @@ import { train } from "./train.js";
 
 export class trainRow extends GrObject {
     constructor(x) {
-        let geometry = new T.BoxGeometry(1, 0.2, 9);
+        let geometry = new T.BoxGeometry(1, 0.2, 17);
         let material = new T.MeshStandardMaterial({ color: 0x664a2c });
         let mesh = new T.Mesh(geometry, material);
 
@@ -23,6 +23,11 @@ export class trainRow extends GrObject {
         this.trainDelay = Math.random() * 500 + 500;
         this.train = train1;
         this.warning = warning;
+
+        this.protoGeo = new T.BoxGeometry(1, 0.2, 17);
+        this.normalGeo = geometry;
+        this.protoMat = new T.MeshStandardMaterial({ color: 0x664a2c });
+        this.normalMat = material;
     }
 
     rowType() {
@@ -37,7 +42,7 @@ export class trainRow extends GrObject {
         }
 
         if (Math.abs(this.train.objects[0].position.z - char.objects[0].position.z) < 25 &&
-            this.objects[0].position.x > -0.4 && this.objects[0].position.x < 0.4) {
+            this.objects[0].position.x > -0.3 && this.objects[0].position.x < 0.3) {
             char.freeze();
         }
 
@@ -53,6 +58,14 @@ export class trainRow extends GrObject {
                 this.trainDelay = Math.random() * 500 + 500;
             } else {
                 this.trainDelay -= 1;
+            }
+
+            if (document.getElementById("prototype").checked) {
+                this.objects[0].geometry = this.protoGeo;
+                this.objects[0].material = this.protoMat;
+            } else {
+                this.objects[0].geometry = this.normalGeo;
+                this.objects[0].material = this.normalMat;
             }
         }
 

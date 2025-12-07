@@ -5,7 +5,7 @@ import { largeCar } from "./largeCar.js";
 
 export class roadRow extends GrObject {
     constructor(x, direction) {
-        let geometry = new T.BoxGeometry(1, 0.2, 9);
+        let geometry = new T.BoxGeometry(1, 0.2, 17);
         let material = new T.MeshStandardMaterial({ color: 0x544f4f });
         let mesh = new T.Mesh(geometry, material);
 
@@ -16,8 +16,13 @@ export class roadRow extends GrObject {
         this.x = x;
         this.direction = direction;
         this.cars = [];
-        this.carDelay = 0;
+        this.carDelay = Math.random() * 50;
         this.nextCar = Math.floor(Math.random() * 2);
+
+        this.protoGeo = new T.BoxGeometry(1, 0.2, 17);
+        this.normalGeo = geometry
+        this.protoMat = new T.MeshStandardMaterial({ color: 0x544f4f });
+        this.normalMat = material;
     }
 
     rowType() {
@@ -32,9 +37,13 @@ export class roadRow extends GrObject {
         }
 
         this.cars.forEach((car) => {
-            if (Math.abs(car.objects[0].position.z - char.objects[0].position.z) < 0.8 &&
-                this.objects[0].position.x > -0.4 && this.objects[0].position.x < 0.4) {
+            if (Math.abs(car.objects[0].position.z - char.objects[0].position.z) < 0.6 &&
+                this.objects[0].position.x > -0.3 && this.objects[0].position.x < 0.3) {
                 char.freeze();
+            }
+
+            if (car.objects[0].position.z > 10 || car.objects[0].position.z < -10) {
+                this.objects[0].remove(car.objects[0]);
             }
         });
 
@@ -50,7 +59,7 @@ export class roadRow extends GrObject {
                     this.objects[0].add(car.objects[0]);
                 }
                 this.nextCar = Math.floor(Math.random() * 2);
-                this.carDelay = 100 + Math.floor(Math.random() * 100);
+                this.carDelay = 50 + Math.random() * 200;
             } else {
                 this.carDelay -= 1;
             }
@@ -58,6 +67,14 @@ export class roadRow extends GrObject {
             this.cars.forEach((car) => {
                 car.stepWorld(delta, timeOfDay, frozen);
             });
+
+            if (document.getElementById("prototype").checked) {
+                this.objects[0].geometry = this.protoGeo;
+                this.objects[0].material = this.protoMat;
+            } else {
+                this.objects[0].geometry = this.normalGeo;
+                this.objects[0].material = this.normalMat;
+            }
         }
     }
 }

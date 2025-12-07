@@ -16,6 +16,11 @@ export class largeCar extends GrObject {
         super("largeCar", mesh);
 
         this.direction = direction;
+
+        this.protoGeo = new T.BoxGeometry(0.8, 0.8, 1.8);
+        this.normalGeo = geometry;
+        this.protoMat = new T.MeshStandardMaterial({ color: 0x183b10 });
+        this.normalMat = material;
     }
 
     stepWorld(delta, timeOfDay, frozen) {
@@ -24,6 +29,14 @@ export class largeCar extends GrObject {
                 this.objects[0].position.z += 0.03;
             } else {
                 this.objects[0].position.z -= 0.03;
+            }
+
+            if (document.getElementById("prototype").checked) {
+                this.objects[0].geometry = this.protoGeo;
+                this.objects[0].material = this.protoMat;
+            } else {
+                this.objects[0].geometry = this.normalGeo;
+                this.objects[0].material = this.normalMat;
             }
         }
     }

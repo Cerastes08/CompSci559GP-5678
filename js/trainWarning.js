@@ -10,6 +10,11 @@ export class trainWarning extends GrObject {
         mesh.position.set(-0.45, 0.5, -2.5);
 
         super("trainWarning", mesh);
+
+        this.protoGeo = new T.CylinderGeometry(0.04, 0.04, 1, 32);
+        this.normalGeo = geometry;
+        this.protoMat = new T.MeshStandardMaterial({ color: 0xffffff });
+        this.normalMat = material;
     }
 
     activate() {
@@ -18,5 +23,17 @@ export class trainWarning extends GrObject {
 
     deactivate() {
         this.objects[0].material.color.set(0xffffff);
+    }
+
+    stepWorld(delta, timeOfDay, frozen) {
+        if (!frozen) {
+            if (document.getElementById("prototype").checked) {
+                this.objects[0].geometry = this.protoGeo;
+                this.objects[0].material = this.protoMat;
+            } else {
+                this.objects[0].geometry = this.normalGeo;
+                this.objects[0].material = this.normalMat;
+            }
+        }
     }
 }

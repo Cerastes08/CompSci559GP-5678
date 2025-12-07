@@ -12,13 +12,18 @@ export class train extends GrObject {
         super("train", mesh);
 
         this.moving = false;
+
+        this.protoGeo = new T.BoxGeometry(0.8, 0.8, 50);
+        this.normalGeo = geometry;
+        this.protoMat = new T.MeshStandardMaterial({ color: 0xffffff });
+        this.normalMat = material;
     }
 
     go() {
         this.moving = true;
     }
 
-    stepWorld(delta, timeOfDay) {
+    stepWorld(delta, timeOfDay, frozen) {
         if (this.moving) {
             this.objects[0].position.z -= 1;
         }
@@ -26,6 +31,14 @@ export class train extends GrObject {
         if (this.objects[0].position.z < -40) {
             this.objects[0].position.z = 40;
             this.moving = false;
+        }
+
+        if (document.getElementById("prototype").checked) {
+            this.objects[0].geometry = this.protoGeo;
+            this.objects[0].material = this.protoMat;
+        } else {
+            this.objects[0].geometry = this.normalGeo;
+            this.objects[0].material = this.normalMat;
         }
     }
 }

@@ -12,9 +12,21 @@ export class lilypad extends GrObject {
         super("lilypad", mesh);
 
         this.z = z;
+        this.protoGeo = new T.CylinderGeometry(0.4, 0.4, 0.3, 32);
+        this.normalGeo = geometry;
+        this.protoMat = new T.MeshStandardMaterial({ color: 0x183b10 });
+        this.normalMat = material;
     }
 
     stepWorld(delta, timeOfDay) {
         this.objects[0].position.z = this.z;
+
+        if (document.getElementById("prototype").checked) {
+            this.objects[0].geometry = this.protoGeo;
+            this.objects[0].material = this.protoMat;
+        } else {
+            this.objects[0].geometry = this.normalGeo;
+            this.objects[0].material = this.normalMat;
+        }
     }
 }
