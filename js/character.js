@@ -100,7 +100,16 @@ export class character extends GrObject {
         // Lift entire rabbit
         rabbit.position.y = 0.15;
         super("Player", rabbit);
-  }
+
+        this.y = 0.15;
+        this.z = 0;
+        this.frozen = false;
+
+        this.protoGeo = new T.BoxGeometry(0.8, 0.8, 0.8);
+        this.normalGeo = geometry;
+        this.protoMat = new T.MeshStandardMaterial({ color: 0xffffff });
+        this.normalMat = material;
+    }
     moved() {
         return this.y === this.objects[0].position.y && this.z === this.objects[0].position.z;
     }
