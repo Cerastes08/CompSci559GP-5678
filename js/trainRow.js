@@ -5,14 +5,47 @@ import { train } from "./train.js";
 
 export class trainRow extends GrObject {
     constructor(x) {
-        let geometry = new T.BoxGeometry(1, 0.2, 17);
-        let material = new T.MeshStandardMaterial({ color: 0x664a2c });
-        let mesh = new T.Mesh(geometry, material);
+        const group = new T.Group();
 
-        mesh.position.set(x, -0.1, 0);
+        /* MATERIALS */
+        const railMat = new T.MeshStandardMaterial({
+        color: 0x666666,
+        roughness: 0.4,
+        metalness: 0.6
+        });
 
-        super("roadRow", mesh);
+        const tieMat = new T.MeshStandardMaterial({
+        color: 0x5a3e2b
+        });
 
+        /* RAILS */
+        const railGeom = new T.BoxGeometry(17, 0.05, 0.08);
+
+        const railOffset = 0.6;
+
+        const leftRail = new T.Mesh(railGeom, railMat);
+        leftRail.position.set(0, 0.05, railOffset);
+        group.add(leftRail);
+
+        const rightRail = leftRail.clone();
+        rightRail.position.z = -railOffset;
+        group.add(rightRail);
+
+        /* TIES */
+        const tieGeom = new T.BoxGeometry(0.25, 0.04, railOffset * 2.3);
+
+        const tieCount = Math.floor(length / 0.5);
+        for (let i = 0; i < tieCount; i++) {
+        const tie = new T.Mesh(tieGeom, tieMat);
+        tie.position.set(
+            -length / 2 + i * 0.5,
+            0.02,
+            0
+        );
+        group.add(tie);
+        }
+        group.scale.setScalar(2);
+        super("Railroad", group);
         this.x = x;
 
         let warning = new trainWarning();
@@ -24,10 +57,10 @@ export class trainRow extends GrObject {
         this.train = train1;
         this.warning = warning;
 
-        this.protoGeo = new T.BoxGeometry(1, 0.2, 17);
+        /*this.protoGeo = new T.BoxGeometry(1, 0.2, 17);
         this.normalGeo = geometry;
         this.protoMat = new T.MeshStandardMaterial({ color: 0x664a2c });
-        this.normalMat = material;
+        this.normalMat = material;*/
     }
 
     rowType() {
@@ -60,13 +93,13 @@ export class trainRow extends GrObject {
                 this.trainDelay -= 1;
             }
 
-            if (document.getElementById("prototype").checked) {
+            /*if (document.getElementById("prototype").checked) {
                 this.objects[0].geometry = this.protoGeo;
                 this.objects[0].material = this.protoMat;
             } else {
                 this.objects[0].geometry = this.normalGeo;
                 this.objects[0].material = this.normalMat;
-            }
+            }*/
         }
 
         this.train.stepWorld(delta, timeOfDay, frozen);

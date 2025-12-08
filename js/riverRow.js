@@ -26,10 +26,10 @@ export class riverRow extends GrObject {
         this.x = x;
         this.lilypads = liylpads;
 
-        this.protoGeo = new T.BoxGeometry(1, 0.2, 17);
+        /*this.protoGeo = new T.BoxGeometry(1, 0.2, 17);
         this.normalGeo = geometry;
         this.protoMat = new T.MeshStandardMaterial({ color: 0x365eba });
-        this.normalMat = material;
+        this.normalMat = material;*/
     }
 
     rowType() {
@@ -44,13 +44,13 @@ export class riverRow extends GrObject {
         }
 
         if (!frozen) {
-            if (document.getElementById("prototype").checked) {
+            /*if (document.getElementById("prototype").checked) {
                 this.objects[0].geometry = this.protoGeo;
                 this.objects[0].material = this.protoMat;
             } else {
                 this.objects[0].geometry = this.normalGeo;
                 this.objects[0].material = this.normalMat;
-            }
+            }*/
 
             this.lilypads.forEach((lp) => {
                 lp.stepWorld(delta, timeOfDay);

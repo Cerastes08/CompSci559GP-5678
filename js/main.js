@@ -12,7 +12,7 @@ let world = new GrWorld({
     lookat: new T.Vector3(-3, 0, 0),
     groundplane: false
 });
-world.orbitControlOff();
+//world.orbitControlOff();
 
 let char = new character();
 world.add(char);

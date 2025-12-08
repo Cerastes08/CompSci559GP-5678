@@ -11,7 +11,7 @@ export class character extends GrObject {
         const pinkMat = new T.MeshStandardMaterial({ color: "pink" });
         const eyeMat = new T.MeshStandardMaterial({ color: "black" });
         const whiskerMat = new T.MeshStandardMaterial({ color: "gray" });
-        // ===== BODY (now 2 parts instead of 1 big cube) =====
+        // ===== BODY  =====
         // Main body
         const bodyMain = new T.Mesh(
           new T.BoxGeometry(1, 0.65, 0.75),
@@ -20,19 +20,19 @@ export class character extends GrObject {
         bodyMain.position.y = 0.45;
         bodyMain.position.z = 0.25;
         rabbit.add(bodyMain);
-        // Rear body (adds shape)
+        // Rear body
         const bodyRear = new T.Mesh(
           new T.BoxGeometry(0.8, 0.6, 0.6),
           whiteMat
         );
         bodyRear.position.set(0, 0.45, -.25);
         rabbit.add(bodyRear);
-        // ===== HEAD (slightly lower) =====
+        // ===== HEAD  =====
         const head = new T.Mesh(
           new T.BoxGeometry(0.6, 0.6, 0.6),
           whiteMat
         );
-        head.position.set(0, 0.88, -0.6); // lowered
+        head.position.set(0, 0.88, -0.6); 
         rabbit.add(head);
     
         // ===== EARS =====
@@ -105,10 +105,10 @@ export class character extends GrObject {
         this.z = 0;
         this.frozen = false;
 
-        this.protoGeo = new T.BoxGeometry(0.8, 0.8, 0.8);
+        /*this.protoGeo = new T.BoxGeometry(0.8, 0.8, 0.8);
         this.normalGeo = geometry;
         this.protoMat = new T.MeshStandardMaterial({ color: 0xffffff });
-        this.normalMat = material;
+        this.normalMat = material;*/
     }
     moved() {
         return this.y === this.objects[0].position.y && this.z === this.objects[0].position.z;
@@ -132,13 +132,13 @@ export class character extends GrObject {
         }
 
         if (!this.frozen) {
-            if (document.getElementById("prototype").checked) {
+            /*if (document.getElementById("prototype").checked) {
                 this.objects[0].geometry = this.protoGeo;
                 this.objects[0].material = this.protoMat;
             } else {
                 this.objects[0].geometry = this.normalGeo;
                 this.objects[0].material = this.normalMat;
-            }
+            }*/
         }
     }
 }

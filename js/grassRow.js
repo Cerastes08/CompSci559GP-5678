@@ -23,12 +23,12 @@ export class grassRow extends GrObject {
 
         this.x = x;
 
-        this.protoGeo = new T.BoxGeometry(1, 0.2, 9);
+        /*this.protoGeo = new T.BoxGeometry(1, 0.2, 9);
         this.normalGeo = geometry;
         this.protoMat = new T.MeshStandardMaterial({ color: 0x00ff00 });
         this.normalMat = material;
         this.protoMat1 = new T.MeshStandardMaterial({ color: 0x214217});
-        this.normalMat1 = material1;
+        this.normalMat1 = material1;*/
     }
 
     rowType() {
@@ -43,7 +43,7 @@ export class grassRow extends GrObject {
         }
 
         if (!frozen) {
-            if (document.getElementById("prototype").checked) {
+            /*if (document.getElementById("prototype").checked) {
                 this.objects[0].geometry = this.protoGeo;
                 this.objects[0].material = this.protoMat;
                 this.objects[0].children[0].material = this.protoMat1;
@@ -53,7 +53,7 @@ export class grassRow extends GrObject {
                 this.objects[0].material = this.normalMat;
                 this.objects[0].children[0].material = this.normalMat1;
                 this.objects[0].children[1].material = this.normalMat1;
-            }
+            }*/
         }
     }
 }
