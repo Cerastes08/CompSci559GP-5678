@@ -170,13 +170,14 @@ export class riverRow extends GrObject {
         }
 
         // Update water time, even if in prototype we won't see it
-        const mat = this.normalMat;
-        if (mat && mat.uniforms && mat.uniforms.uTime) {
-            // use timeOfDay from GrWorld as animation clock
-            mat.uniforms.uTime.value = timeOfDay;
-        }
 
         if (!frozen) {
+            const mat = this.normalMat;
+            if (mat && mat.uniforms && mat.uniforms.uTime) {
+                // use timeOfDay from GrWorld as animation clock
+                mat.uniforms.uTime.value = timeOfDay;
+            }
+
             const protoBox = document.getElementById("prototype");
             const proto = protoBox ? protoBox.checked : false;
 
@@ -194,7 +195,7 @@ export class riverRow extends GrObject {
             });
 
             // After lilypads update, push their CURRENT local positions into the shader
-            const mat = this.normalMat;
+            //const mat = this.normalMat;
             if (mat && mat.uniforms && mat.uniforms.uRippleCenters && mat.uniforms.uWidth) {
             const width = mat.uniforms.uWidth.value;              // 17
             const centers = mat.uniforms.uRippleCenters.value;    // array of Vector2
