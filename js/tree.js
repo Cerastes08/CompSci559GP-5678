@@ -6,7 +6,7 @@ export class Tree extends GrObject {
     const group = new T.Group();
 
     // Load bark texture
-    const barkTexture = new T.TextureLoader().load("../textures/bark_downscale.jpg");
+    const barkTexture = new T.TextureLoader().load("../../CompSci559GP-5678/textures/bark_downscale.jpg");
     barkTexture.wrapS = T.RepeatWrapping;
     barkTexture.wrapT = T.RepeatWrapping;
     barkTexture.repeat.set(1, 2);
@@ -25,7 +25,7 @@ export class Tree extends GrObject {
     group.add(trunk);
 
     // Load leaf texture
-    const leafTexture = new T.TextureLoader().load("../textures/tree2_downscale.jpg");
+    const leafTexture = new T.TextureLoader().load("../../CompSci559GP-5678/textures/tree2_downscale.jpg");
     leafTexture.center.set(0.5, 0.5);
     leafTexture.flipY = false;
     leafTexture.anisotropy = 8;
