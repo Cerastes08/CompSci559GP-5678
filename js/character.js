@@ -7,7 +7,7 @@ export class character extends GrObject {
         rabbit.rotateY(Math.PI/2);
         const furText = new T.TextureLoader().load("../../CompSci559GP-5678/textures/beastfur.png");
         const whiteMat = new T.MeshStandardMaterial({
-          map: furText,
+          map: furText
         });
         const pinkMat = new T.MeshStandardMaterial({ color: "pink" });
         const eyeMat = new T.MeshStandardMaterial({ color: "black" });

@@ -157,7 +157,7 @@ export class smallCar extends GrObject {
         group.add(rearBumper);
 
         group.scale.setScalar(1);
-
+        group.position.y = 0.1;
         group.position.z = direction === 0 ? -6 : 6;
         super("Car", group);
 

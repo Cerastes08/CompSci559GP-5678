@@ -162,6 +162,7 @@ export class largeCar extends GrObject {
         group.scale.setScalar(1);
 
         group.position.z = direction === 0 ? -6 : 6;
+        group.position.y = 0.1;
         super("Van", group);
 
 

@@ -4,6 +4,7 @@ import { GrObject } from "../libs/CS559-Framework/GrObject.js";
 export class train extends GrObject {
     constructor() {
         const group = new T.Group();
+        group.rotateY(Math.PI / 2);
 
         /* MATERIALS */
         const engineMat = new T.MeshStandardMaterial({
@@ -77,11 +78,11 @@ export class train extends GrObject {
         const cabSideWindowGeom = new T.BoxGeometry(0.25, 0.3, 0.02);
 
         const cabLeftWindow = new T.Mesh(cabSideWindowGeom, windowMat);
-        cabLeftWindow.position.set(-0.4, 0.65, 0.42);
+        cabLeftWindow.position.set(-0.4, 0.65, 0.4);
         group.add(cabLeftWindow);
 
         const cabRightWindow = cabLeftWindow.clone();
-        cabRightWindow.position.z = -0.42;
+        cabRightWindow.position.z = -0.4;
         group.add(cabRightWindow);
 
         /* EXHAUST STACK */
@@ -119,8 +120,9 @@ export class train extends GrObject {
 
         /* BOX CARS */
         const carSpacing = 1.6;
+        let boxcars = [];
 
-        for (let i = 1; i <= 3; i++) {
+        for (let i = 1; i <= 6; i++) {
         const x = -i * carSpacing;
 
         const boxCar = new T.Mesh(
@@ -128,6 +130,7 @@ export class train extends GrObject {
             boxMat
         );
         boxCar.position.set(x, 0.35, 0);
+        boxcars.push(boxCar);
         group.add(boxCar);
 
         const boxRoof = new T.Mesh(
@@ -141,11 +144,11 @@ export class train extends GrObject {
         const carWindowGeom = new T.BoxGeometry(0.8, 0.25, 0.02);
 
         const leftCarWindow = new T.Mesh(carWindowGeom, windowMat);
-        leftCarWindow.position.set(x, 0.5, 0.46);
+        leftCarWindow.position.set(x, 0.5, 0.43);
         group.add(leftCarWindow);
 
         const rightCarWindow = leftCarWindow.clone();
-        rightCarWindow.position.z = -0.46;
+        rightCarWindow.position.z = -0.43;
         group.add(rightCarWindow);
         }
 
@@ -206,19 +209,21 @@ export class train extends GrObject {
         });
 
         // Box car wheels – 2 per side per car
-        for (let i = 1; i <= 3; i++) {
+        for (let i = 1; i <= 6; i++) {
         [-0.4, 0.4].forEach(dx => {
             const baseX = -i * carSpacing + dx;
             makeWheel(baseX, 0.4);
             makeWheel(baseX, -0.4);
         });
         }
-        group.scale.setScalar(5);
-        group.position.y = 0.25;
+        group.scale.setScalar(1);
+        group.position.y = 0.1;
+        group.position.z = 15;
 
         super("Train", group);
 
         this.moving = false;
+        this.boxcars = boxcars;
 
         /*this.protoGeo = new T.BoxGeometry(0.8, 0.8, 50);
         this.normalGeo = geometry;
@@ -235,8 +240,8 @@ export class train extends GrObject {
             this.objects[0].position.z -= 1;
         }
 
-        if (this.objects[0].position.z < -40) {
-            this.objects[0].position.z = 40;
+        if (this.objects[0].position.z < -15) {
+            this.objects[0].position.z = 15;
             this.moving = false;
         }
 

@@ -86,7 +86,7 @@ export class trainRow extends GrObject {
             this.objects[0].position.x -= 0.2;
         }
 
-        if (Math.abs(this.train.objects[0].position.z - char.objects[0].position.z) < 27 &&
+        if (Math.abs((this.train.objects[0].position.z + 4) - char.objects[0].position.z) < 6 &&
             this.objects[0].position.x > -0.3 && this.objects[0].position.x < 0.3) {
             char.freeze();
         }
