@@ -12,7 +12,7 @@ let world = new GrWorld({
     lookat: new T.Vector3(-3, 0, 0),
     groundplane: false
 });
-//world.orbitControlOff();
+world.orbitControlOff();
 
 let char = new character();
 world.add(char);
@@ -32,9 +32,6 @@ document.addEventListener("keydown", (event) => {
             rowController1.freeze();
             return;
         }
-        if (char.objects[0].position.z > (char.z - 0.06) && char.objects[0].position.z < (char.z + 0.06)) {
-            keydown = false;
-        }
         if (keydown === true) {
             return;
         }
@@ -42,7 +39,7 @@ document.addEventListener("keydown", (event) => {
             keydown = true;
             let farthestRow = rowController1.rows[rowController1.rows.length - 1];
             let nearestRow = rowController1.rows[points + 5];
-
+            char.objects[0].rotation.y = Math.PI / 2;
             points += 1;
             scoreText.innerText = "Score: " + points;
             rowController1.rows.forEach(row => {
@@ -71,7 +68,7 @@ document.addEventListener("keydown", (event) => {
             keydown = true;
             let farthestRow = rowController1.rows[rowController1.rows.length - 1];
             let nearestRow = rowController1.rows[points + 3];
-
+            char.objects[0].rotation.y = -Math.PI / 2;
             points -= 1;
             scoreText.innerText = "Score: " + points;
             rowController1.rows.forEach(row => {
@@ -88,6 +85,7 @@ document.addEventListener("keydown", (event) => {
             if (char.z > -4) {
                 char.z -= 1;
             }
+            char.objects[0].rotation.y = 0;
             let nearestRow = rowController1.rows[points + 4];
             if (nearestRow.rowType() === "river" && !(char.z === 0 || char.z === 3 || char.z === -3)) {
                 gameOver = true;
@@ -99,6 +97,7 @@ document.addEventListener("keydown", (event) => {
             if (char.z < 4) {
                 char.z += 1;
             }
+            char.objects[0].rotation.y = -Math.PI;
             let nearestRow = rowController1.rows[points + 4];
             if (nearestRow.rowType() === "river" && !(char.z === 0 || char.z === 3 || char.z === -3)) {
                 gameOver = true;
@@ -109,6 +108,7 @@ document.addEventListener("keydown", (event) => {
 });
 document.addEventListener("keyup", (event) => {
     console.log("Points: " + points);
+    keydown = false;
     if (char.frozen) {
         gameOver = true;
         rowController1.freeze();

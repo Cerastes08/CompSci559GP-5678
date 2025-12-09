@@ -37,9 +37,16 @@ export class roadRow extends GrObject {
         }
 
         this.cars.forEach((car) => {
-            if (Math.abs(car.objects[0].position.z - char.objects[0].position.z) < 0.6 &&
-                this.objects[0].position.x > -0.3 && this.objects[0].position.x < 0.3) {
-                char.freeze();
+            if (car instanceof smallCar) {
+                if (Math.abs(car.objects[0].position.z - char.objects[0].position.z) < 0.85 &&
+                    this.objects[0].position.x > -0.3 && this.objects[0].position.x < 0.3) {
+                    char.freeze();
+                }
+            } else {
+                if (Math.abs(car.objects[0].position.z - char.objects[0].position.z) < 1.1 &&
+                    this.objects[0].position.x > -0.3 && this.objects[0].position.x < 0.3) {
+                    char.freeze();
+                }
             }
 
             if (car.objects[0].position.z > 10 || car.objects[0].position.z < -10) {
@@ -59,7 +66,7 @@ export class roadRow extends GrObject {
                     this.objects[0].add(car.objects[0]);
                 }
                 this.nextCar = Math.floor(Math.random() * 2);
-                this.carDelay = 50 + Math.random() * 200;
+                this.carDelay = 70 + Math.random() * 200;
             } else {
                 this.carDelay -= 1;
             }

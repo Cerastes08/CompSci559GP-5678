@@ -4,6 +4,8 @@ import { GrObject } from "../libs/CS559-Framework/GrObject.js";
 export class trainWarning extends GrObject {
     constructor() {
         const group = new T.Group();
+        group.rotateY(Math.PI / 2);
+        group.position.set(-0.4, 0.1, -2.75);
 
         /* MATERIALS */
         const poleMat = new T.MeshStandardMaterial({ color: 0xaaaaaa });
@@ -87,19 +89,25 @@ export class trainWarning extends GrObject {
 
         const h2 = h1.clone();
         h2.position.copy(rightLight.position);
+        h2.position.z -= 0.05;
 
         group.add(h1, h2);
 
         /* BASE */
         const base = new T.Mesh(
-        new T.CylinderGeometry(0.18, 0.18, 0.1, 12),
+        new T.CylinderGeometry(0.18, 0.18, 0.4, 12),
         poleMat
         );
-        base.position.y = 0.05;
-        group.scale.setScalar(2);
+        base.position.y = -0.2;
+        group.scale.setScalar(0.5);
         group.add(base);
 
         super("RailroadSignal", group);
+
+        this.leftLight = leftLight;
+        this.righttLight = rightLight;
+        this.lightOnMat = lightOnMat;
+        this.lightOffMat = lightOffMat;
 
         /*this.protoGeo = new T.CylinderGeometry(0.04, 0.04, 1, 32);
         this.normalGeo = geometry;
@@ -108,11 +116,13 @@ export class trainWarning extends GrObject {
     }
 
     activate() {
-        //this.objects[0].material.color.set(0xff0000);
+        this.leftLight.material = this.lightOnMat;
+        this.righttLight.material = this.lightOnMat;
     }
 
     deactivate() {
-        //this.objects[0].material.color.set(0xffffff);
+        this.leftLight.material = this.lightOffMat;
+        this.righttLight.material = this.lightOffMat;
     }
 
     stepWorld(delta, timeOfDay, frozen) {

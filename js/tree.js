@@ -1,9 +1,12 @@
+import * as T from "../libs/CS559-Three/build/three.module.js";
+import { GrObject } from "../libs/CS559-Framework/GrObject.js";
+
 export class Tree extends GrObject {
   constructor() {
     const group = new T.Group();
 
     // Load bark texture
-    const barkTexture = new T.TextureLoader().load("../textures/bark.png");
+    const barkTexture = new T.TextureLoader().load("../textures/bark_downscale.jpg");
     barkTexture.wrapS = T.RepeatWrapping;
     barkTexture.wrapT = T.RepeatWrapping;
     barkTexture.repeat.set(1, 2);
@@ -22,7 +25,7 @@ export class Tree extends GrObject {
     group.add(trunk);
 
     // Load leaf texture
-    const leafTexture = new T.TextureLoader().load("../textures/tree2.jpg");
+    const leafTexture = new T.TextureLoader().load("../textures/tree2_downscale.jpg");
     leafTexture.center.set(0.5, 0.5);
     leafTexture.flipY = false;
     leafTexture.anisotropy = 8;
@@ -64,7 +67,7 @@ export class Tree extends GrObject {
 
     // Variation
     group.scale.setScalar(0.95 + Math.random() * 0.15);
-    group.scale.setScalar(9);
+    group.scale.setScalar(0.8);
     group.rotation.y = Math.random() * Math.PI * 2;
 
     super("Tree", group);

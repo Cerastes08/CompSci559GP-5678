@@ -6,21 +6,20 @@ export class lilypad extends GrObject {
         const group = new T.Group();
 
         // Load texture
-        const lilyText = new T.TextureLoader().load("../textures/lilypad_v2.png");
-
+        const lilyText = new T.TextureLoader().load("../textures/lilypad_v2_colored.png");
         lilyText.center.set(0.5, 0.5);
-        lilyText.rotation = 0;         
+        lilyText.rotation = Math.random()*Math.PI*2;
 
         const padMat = new T.MeshStandardMaterial({
         map: lilyText
         });
 
         // Geometry
-        const padGeom = new T.CylinderGeometry(0.6, 0.6, 0.03, 32);
+        const padGeom = new T.CylinderGeometry(0.4, 0.4, 0.03, 32);
         const pad = new T.Mesh(padGeom, padMat);
 
         // Lift above water
-        pad.position.y = 0.07;
+        pad.position.y = 0.1;
 
         group.add(pad);
 

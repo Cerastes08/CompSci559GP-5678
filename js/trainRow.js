@@ -5,7 +5,9 @@ import { train } from "./train.js";
 
 export class trainRow extends GrObject {
     constructor(x) {
+        let length = 17;
         const group = new T.Group();
+        group.position.set(x, 0, 0);
 
         /* MATERIALS */
         const railMat = new T.MeshStandardMaterial({
@@ -18,33 +20,43 @@ export class trainRow extends GrObject {
         color: 0x5a3e2b
         });
 
-        /* RAILS */
-        const railGeom = new T.BoxGeometry(17, 0.05, 0.08);
+        const groundMat = new T.MeshStandardMaterial({
+        color: 0x664a2c
+        });
 
-        const railOffset = 0.6;
+        /* GROUND */
+        const groundGeom = new T.BoxGeometry(1, 0.2, 17);
+        const ground = new T.Mesh(groundGeom, groundMat);
+        ground.position.y = -0.1;
+        group.add(ground);
+
+        /* RAILS */
+        const railGeom = new T.BoxGeometry(0.06, 0.05, 17);
+
+        const railOffset = 0.4;
 
         const leftRail = new T.Mesh(railGeom, railMat);
-        leftRail.position.set(0, 0.05, railOffset);
+        leftRail.position.set(railOffset, 0.05, 0);
         group.add(leftRail);
 
         const rightRail = leftRail.clone();
-        rightRail.position.z = -railOffset;
+        rightRail.position.x = -railOffset;
         group.add(rightRail);
 
         /* TIES */
-        const tieGeom = new T.BoxGeometry(0.25, 0.04, railOffset * 2.3);
+        const tieGeom = new T.BoxGeometry(railOffset * 2.3, 0.04, 0.25);
 
         const tieCount = Math.floor(length / 0.5);
         for (let i = 0; i < tieCount; i++) {
         const tie = new T.Mesh(tieGeom, tieMat);
         tie.position.set(
-            -length / 2 + i * 0.5,
+            0,
             0.02,
-            0
+            -length / 2 + i * 0.5
         );
         group.add(tie);
         }
-        group.scale.setScalar(2);
+        group.scale.setScalar(1);
         super("Railroad", group);
         this.x = x;
 
@@ -74,7 +86,7 @@ export class trainRow extends GrObject {
             this.objects[0].position.x -= 0.2;
         }
 
-        if (Math.abs(this.train.objects[0].position.z - char.objects[0].position.z) < 25 &&
+        if (Math.abs(this.train.objects[0].position.z - char.objects[0].position.z) < 27 &&
             this.objects[0].position.x > -0.3 && this.objects[0].position.x < 0.3) {
             char.freeze();
         }

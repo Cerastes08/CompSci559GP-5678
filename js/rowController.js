@@ -12,7 +12,7 @@ export class rowControlller extends GrObject {
         let geometry = new T.SphereGeometry(0.5, 32, 32);
         let material = new T.MeshStandardMaterial({ color: 0xff0000 });
         let mesh = new T.Mesh(geometry, material);
-        mesh.position.y = -0.5;
+        mesh.position.y = -1;
 
         controller.add(mesh);
 

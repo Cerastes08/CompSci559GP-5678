@@ -4,6 +4,12 @@ import { GrObject } from "../libs/CS559-Framework/GrObject.js";
 export class largeCar extends GrObject {
     constructor(direction) {
         const group = new T.Group();
+        if (direction === 0) {
+            group.rotateY(-Math.PI / 2);
+        } else {
+            group.rotateY(Math.PI / 2);
+        }
+
         /*  SHARED MATERIALS */
         const carMat = new T.MeshStandardMaterial({
         color: "white",
@@ -153,8 +159,9 @@ export class largeCar extends GrObject {
         rearBumper.position.set(-.85, 0.18, 0);
         group.add(rearBumper);
 
-        group.scale.setScalar(5);
+        group.scale.setScalar(1);
 
+        group.position.z = direction === 0 ? -6 : 6;
         super("Van", group);
 
 

@@ -10,21 +10,21 @@ export class riverRow extends GrObject {
 
         mesh.position.set(x, -0.2, 0);
 
-        let liylpads = [];
+        let lilypads = [];
         let lilypad1 = new lilypad(3);
         mesh.add(lilypad1.objects[0]);
-        liylpads.push(lilypad1);
+        lilypads.push(lilypad1);
         let lilypad2 = new lilypad(-3);
         mesh.add(lilypad2.objects[0]);
-        liylpads.push(lilypad2);
+        lilypads.push(lilypad2);
         let lilypad3 = new lilypad(0);
         mesh.add(lilypad3.objects[0]);
-        liylpads.push(lilypad3);
+        lilypads.push(lilypad3);
 
         super("riverRow", mesh);
 
         this.x = x;
-        this.lilypads = liylpads;
+        this.lilypads = lilypads;
 
         /*this.protoGeo = new T.BoxGeometry(1, 0.2, 17);
         this.normalGeo = geometry;

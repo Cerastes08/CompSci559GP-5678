@@ -1,5 +1,6 @@
 import * as T from "../libs/CS559-Three/build/three.module.js";
 import { GrObject } from "../libs/CS559-Framework/GrObject.js";
+import { Tree } from "./tree.js";
 
 export class grassRow extends GrObject {
     constructor(x) {
@@ -18,6 +19,20 @@ export class grassRow extends GrObject {
 
         mesh.add(mesh1);
         mesh.add(mesh2);
+
+        let tree1 = new Tree();
+        tree1.objects[0].position.set(0.3, 0, -6.8);
+        let tree2 = new Tree();
+        tree2.objects[0].position.set(-0.2, 0, -5.3);
+        let tree3 = new Tree();
+        tree3.objects[0].position.set(0.1, 0, 5.1);
+        let tree4 = new Tree();
+        tree4.objects[0].position.set(-0.2, 0, 6.3);
+
+        mesh.add(tree1.objects[0]);
+        mesh.add(tree2.objects[0]);
+        mesh.add(tree3.objects[0]);
+        mesh.add(tree4.objects[0]);
 
         super("grassRow", mesh);
 
