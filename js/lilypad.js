@@ -6,7 +6,7 @@ export class lilypad extends GrObject {
         const group = new T.Group();
 
         // Load texture
-        const lilyText = new T.TextureLoader().load("../textures/lilypad_v2_colored.png");
+        const lilyText = new T.TextureLoader().load("../../CompSci559GP-5678/textures/lilypad_v2_colored.png");
         lilyText.center.set(0.5, 0.5);
         lilyText.rotation = Math.random()*Math.PI*2;
 

@@ -5,9 +5,8 @@ export class Tree extends GrObject {
   constructor() {
     const group = new T.Group();
 
-    // test
     // Load bark texture
-    const barkTexture = new T.TextureLoader().load("../../ComppSci559GP-5678/textures/bark_downscale.jpg");
+    const barkTexture = new T.TextureLoader().load("../../CompSci559GP-5678/textures/bark_downscale.jpg");
     barkTexture.wrapS = T.RepeatWrapping;
     barkTexture.wrapT = T.RepeatWrapping;
     barkTexture.repeat.set(1, 2);
