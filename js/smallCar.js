@@ -158,7 +158,7 @@ export class smallCar extends GrObject {
 
         group.scale.setScalar(1);
         group.position.y = 0.1;
-        group.position.z = direction === 0 ? -6 : 6;
+        group.position.z = direction === 0 ? -10 : 10;
         super("Car", group);
 
         this.direction = direction;
