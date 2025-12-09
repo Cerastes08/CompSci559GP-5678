@@ -5,7 +5,7 @@ export class character extends GrObject {
     constructor() {
         const rabbit = new T.Group();
         rabbit.rotateY(Math.PI/2);
-        const furText = new T.TextureLoader().load("../textures/beastfur.png");
+        const furText = new T.TextureLoader().load("../../CompSci559GP-5678/textures/beastfur.png");
         const whiteMat = new T.MeshStandardMaterial({
           map: furText,
         });
@@ -112,7 +112,7 @@ export class character extends GrObject {
         this.protoMat = new T.MeshStandardMaterial({ color: 0xffffff });
         this.normalMat = material;*/
     }
-    
+
     moved() {
         return this.y === this.objects[0].position.y && this.z === this.objects[0].position.z;
     }
