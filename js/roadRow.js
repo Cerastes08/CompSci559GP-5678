@@ -234,18 +234,27 @@ export class roadRow extends GrObject {
     this.normalGeo = geometry;
     this.protoMat = protoMat;
     this.normalMat = roadMat;
+    this.difficulty = 0;
   }
 
   rowType() {
     return "road";
   }
 
+  increaseDifficulty() {
+    this.difficulty += 1;
+  }
+
+  decreaseDifficulty() {
+    this.difficulty -= 1;
+  }
+
   stepWorld(delta, timeOfDay, frozen, char) {
     // unchanged X snapping :contentReference[oaicite:3]{index=3}
     if (this.objects[0].position.x < (this.x - 0.06)) {
-      this.objects[0].position.x += 0.2;
+      this.objects[0].position.x += 0.2*delta*0.05;
     } else if (this.objects[0].position.x > (this.x + 0.06)) {
-      this.objects[0].position.x -= 0.2;
+      this.objects[0].position.x -= 0.2*delta*0.05;
     }
 
     // unchanged collision/removal logic :contentReference[oaicite:4]{index=4}
@@ -277,11 +286,11 @@ export class roadRow extends GrObject {
         this.nextCar = Math.floor(Math.random() * 2);
         this.carDelay = 50 + Math.random() * 200;
       } else {
-        this.carDelay -= 1;
+        this.carDelay -= (1 + 0.001*this.difficulty)*delta*0.05;
       }
 
       this.cars.forEach((car) => {
-        car.stepWorld(delta, timeOfDay, frozen);
+        car.stepWorld(delta, timeOfDay, frozen, this.difficulty);
       });
 
       // unchanged prototype swap behavior :contentReference[oaicite:6]{index=6}

@@ -106,11 +106,10 @@ export class character extends GrObject {
         this.y = 0;
         this.z = 0;
         this.frozen = false;
+        this.children = this.objects[0].children;
 
-        /*this.protoGeo = new T.BoxGeometry(0.8, 0.8, 0.8);
-        this.normalGeo = geometry;
-        this.protoMat = new T.MeshStandardMaterial({ color: 0xffffff });
-        this.normalMat = material;*/
+        this.protoMat = new T.MeshStandardMaterial({ color: 0x5c5445 });
+        this.normalMat = whiteMat;
     }
 
     moved() {
@@ -129,19 +128,35 @@ export class character extends GrObject {
         }
 
         if (this.objects[0].position.z < (this.z - 0.06)) {
-            this.objects[0].position.z += 0.2;
+            this.objects[0].position.z += 0.2*delta*0.05;
         } else if (this.objects[0].position.z > (this.z + 0.06)) {
-            this.objects[0].position.z -= 0.2;
+            this.objects[0].position.z -= 0.2*delta*0.05;
         }
 
         if (!this.frozen) {
-            /*if (document.getElementById("prototype").checked) {
-                this.objects[0].geometry = this.protoGeo;
-                this.objects[0].material = this.protoMat;
+            if (document.getElementById("prototype").checked) {
+              this.children[0].material = this.protoMat;
+              this.children[1].material = this.protoMat;
+              this.children[2].material = this.protoMat;
+              this.children[3].material = this.protoMat;
+              this.children[4].material = this.protoMat;
+              this.children[12].material = this.protoMat;
+              this.children[13].material = this.protoMat;
+              this.children[14].material = this.protoMat;
+              this.children[15].material = this.protoMat;
+              this.children[16].material = this.protoMat;
             } else {
-                this.objects[0].geometry = this.normalGeo;
-                this.objects[0].material = this.normalMat;
-            }*/
+              this.children[0].material = this.normalMat;
+              this.children[1].material = this.normalMat;
+              this.children[2].material = this.normalMat;
+              this.children[3].material = this.normalMat;
+              this.children[4].material = this.normalMat;
+              this.children[12].material = this.normalMat;
+              this.children[13].material = this.normalMat;
+              this.children[14].material = this.normalMat;
+              this.children[15].material = this.normalMat;
+              this.children[16].material = this.normalMat;
+            }
         }
     }
 }

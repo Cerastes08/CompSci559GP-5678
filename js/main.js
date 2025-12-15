@@ -41,6 +41,7 @@ document.addEventListener("keydown", (event) => {
             let nearestRow = rowController1.rows[points + 5];
             char.objects[0].rotation.y = Math.PI / 2;
             points += 1;
+            rowController1.increaseDifficulty();
             scoreText.innerText = "Score: " + points;
             rowController1.rows.forEach(row => {
                 row.x += 1;
@@ -70,6 +71,7 @@ document.addEventListener("keydown", (event) => {
             let nearestRow = rowController1.rows[points + 3];
             char.objects[0].rotation.y = -Math.PI / 2;
             points -= 1;
+            rowController1.decreaseDifficulty();
             scoreText.innerText = "Score: " + points;
             rowController1.rows.forEach(row => {
                 row.x -= 1;

@@ -237,7 +237,7 @@ export class train extends GrObject {
 
     stepWorld(delta, timeOfDay, frozen) {
         if (this.moving) {
-            this.objects[0].position.z -= 1;
+            this.objects[0].position.z -= 0.05*delta;
         }
 
         if (this.objects[0].position.z < -15) {

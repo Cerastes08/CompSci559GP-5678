@@ -169,12 +169,12 @@ export class smallCar extends GrObject {
         this.normalMat = material;*/
     }
 
-    stepWorld(delta, timeOfDay, frozen) {
+    stepWorld(delta, timeOfDay, frozen, difficulty) {
         if (!frozen) {
             if (this.direction === 0) {
-                this.objects[0].position.z += 0.03;
+                this.objects[0].position.z += (0.03 + 0.001*difficulty)*delta*0.05;
             } else {
-                this.objects[0].position.z -= 0.03;
+                this.objects[0].position.z -= (0.03 + 0.001*difficulty)*delta*0.05;
             }
 
             /*if (document.getElementById("prototype").checked) {

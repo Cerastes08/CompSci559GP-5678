@@ -61,6 +61,14 @@ export class rowControlller extends GrObject {
         this.objects[0].add(tRow.objects[0]);
     }
 
+    increaseDifficulty() {
+        this.rows.forEach(row => {row.increaseDifficulty()});
+    }
+
+    decreaseDifficulty() {
+        this.rows.forEach(row => {row.decreaseDifficulty()});
+    }
+
     freeze() {
         this.frozen = true;
     }

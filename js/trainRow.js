@@ -68,6 +68,7 @@ export class trainRow extends GrObject {
         this.trainDelay = Math.random() * 500 + 500;
         this.train = train1;
         this.warning = warning;
+        this.difficulty = 0;
 
         /*this.protoGeo = new T.BoxGeometry(1, 0.2, 17);
         this.normalGeo = geometry;
@@ -79,11 +80,19 @@ export class trainRow extends GrObject {
         return "train";
     }
 
+    increaseDifficulty() {
+        this.difficulty += 1;
+    }
+
+    decreaseDifficulty() {
+        this.difficulty -= 1;
+    }
+
     stepWorld(delta, timeOfDay, frozen, char) {
         if (this.objects[0].position.x < (this.x - 0.06)) {
-            this.objects[0].position.x += 0.2;
+            this.objects[0].position.x += 0.2*delta*0.05;
         } else if (this.objects[0].position.x > (this.x + 0.06)) {
-            this.objects[0].position.x -= 0.2;
+            this.objects[0].position.x -= 0.2*delta*0.05;
         }
 
         if (Math.abs((this.train.objects[0].position.z + 4) - char.objects[0].position.z) < 6 &&
@@ -102,7 +111,7 @@ export class trainRow extends GrObject {
                 this.train.go();
                 this.trainDelay = Math.random() * 500 + 500;
             } else {
-                this.trainDelay -= 1;
+                this.trainDelay -= (1 + 0.01*this.difficulty)*delta*0.05;
             }
 
             /*if (document.getElementById("prototype").checked) {

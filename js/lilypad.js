@@ -3,8 +3,6 @@ import { GrObject } from "../libs/CS559-Framework/GrObject.js";
 
 export class lilypad extends GrObject {
     constructor(z) {
-        const group = new T.Group();
-
         // Load texture
         const lilyText = new T.TextureLoader().load("../../CompSci559GP-5678/textures/lilypad_v2_colored.png");
         lilyText.center.set(0.5, 0.5);
@@ -21,26 +19,25 @@ export class lilypad extends GrObject {
         // Lift above water
         pad.position.y = 0.1;
 
-        group.add(pad);
-
-        super("Lilypad", group);
+        super("Lilypad", pad);
 
         this.z = z;
-        /*this.protoGeo = new T.CylinderGeometry(0.4, 0.4, 0.3, 32);
-        this.normalGeo = geometry;
-        this.protoMat = new T.MeshStandardMaterial({ color: 0x183b10 });
-        this.normalMat = material;*/
+        this.protoMat = new T.MeshStandardMaterial({ color: 0x183b10, map: null });
+        this.normalMat = padMat;
     }
 
     stepWorld(delta, timeOfDay) {
         this.objects[0].position.z = this.z;
+        const protoMat = this.protoMat;
 
-        /*if (document.getElementById("prototype").checked) {
-            this.objects[0].geometry = this.protoGeo;
+        const protoBox = document.getElementById("prototype");
+        const proto = protoBox ? protoBox.checked : false;
+
+        if (proto) {
+            console.log("proto");
             this.objects[0].material = this.protoMat;
         } else {
-            this.objects[0].geometry = this.normalGeo;
             this.objects[0].material = this.normalMat;
-        }*/
+        }
     }
 }

@@ -226,7 +226,7 @@ export class grassRow extends GrObject {
     });
 
     // --- prototype (flat) materials ---
-    const grassMatProto = new T.MeshStandardMaterial({ color: 0x00ff00 });
+    const grassMatProto = new T.MeshStandardMaterial({ color: 0x3b822c });
     const forestMatProto = new T.MeshStandardMaterial({ color: 0x214217 });
     const dirtMatProto = new T.MeshStandardMaterial({ color: 0x6b4f2a });
 
@@ -611,12 +611,16 @@ export class grassRow extends GrObject {
     return "grass";
   }
 
+  increaseDifficulty() {}
+
+  decreaseDifficulty() {}
+
   stepWorld(delta, timeOfDay, frozen, char) {
     // keep your same snapping motion
     if (this.objects[0].position.x < (this.x - 0.06)) {
-      this.objects[0].position.x += 0.2;
+      this.objects[0].position.x += 0.2*delta*0.05;
     } else if (this.objects[0].position.x > (this.x + 0.06)) {
-      this.objects[0].position.x -= 0.2;
+      this.objects[0].position.x -= 0.2*delta*0.05;
     }
 
     if (!frozen) {
