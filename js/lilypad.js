@@ -1,6 +1,9 @@
 import * as T from "../libs/CS559-Three/build/three.module.js";
 import { GrObject } from "../libs/CS559-Framework/GrObject.js";
 
+
+
+
 export class lilypad extends GrObject {
     constructor(z) {
         // Load texture
@@ -21,23 +24,50 @@ export class lilypad extends GrObject {
 
         super("Lilypad", pad);
 
+        this.time = 0;
+        this.baseY = 0.25;
+        this.baseX = .05;
+        this.baseZ = z;
+
         this.z = z;
         this.protoMat = new T.MeshStandardMaterial({ color: 0x183b10, map: null });
         this.normalMat = padMat;
     }
 
-    stepWorld(delta, timeOfDay) {
-        this.objects[0].position.z = this.z;
-        const protoMat = this.protoMat;
 
+
+    stepWorld(delta, timeOfDay) {
+        const pad = this.objects[0];
+        this.time += delta;
+
+        // Float settings
+        const bobSpeed = 0.003;
+        const bobHeight = 0.025;
+        const swayWidth = 0.03;
+        const driftDepth = 0.08;   
+
+        // Vertical bob 
+        pad.position.y = this.baseY + Math.sin(this.time * bobSpeed + this.baseZ) * bobHeight;
+
+        // Horizontal sway
+        pad.position.x = this.baseX + Math.sin(this.time * bobSpeed * 0.8) * swayWidth;
+
+        // left-right drift
+        pad.position.z = this.baseZ + Math.sin(this.time * bobSpeed * 0.6) * driftDepth;
+
+        // Prototype toggle
         const protoBox = document.getElementById("prototype");
-        const proto = protoBox ? protoBox.checked : false;
+        let proto = false;
+        if (protoBox) {
+            proto = protoBox.checked;
+        }
 
         if (proto) {
-            console.log("proto");
-            this.objects[0].material = this.protoMat;
+            pad.material = this.protoMat;
         } else {
-            this.objects[0].material = this.normalMat;
+            pad.material = this.normalMat;
         }
     }
+
+
 }
