@@ -16,7 +16,7 @@ export class lilypad extends GrObject {
         });
 
         // Geometry
-        const padGeom = new T.CylinderGeometry(0.4, 0.4, 0.03, 32);
+        const padGeom = new T.CylinderGeometry(0.35, 0.35, 0.03, 32);
         const pad = new T.Mesh(padGeom, padMat);
 
         // Lift above water
