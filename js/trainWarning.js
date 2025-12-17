@@ -6,8 +6,8 @@ import { GrObject } from "../libs/CS559-Framework/GrObject.js";
 export class trainWarning extends GrObject {
     constructor() {
         const texLoader = new T.TextureLoader();
-        const signTex = texLoader.load("../textures/rrsign.jpg");
-        //const signTex = texLoader.load("../../CompSci559GP-5678/textures/rrsign.jpg");
+        //const signTex = texLoader.load("../textures/rrsign.jpg");
+        const signTex = texLoader.load("../../CompSci559GP-5678/textures/rrsign.jpg");
         signTex.colorSpace = T.SRGBColorSpace;
         signTex.anisotropy = 16;
         const group = new T.Group();
