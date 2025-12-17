@@ -7,9 +7,9 @@ export class trainWarning extends GrObject {
     constructor() {
         const texLoader = new T.TextureLoader();
         const signTex = texLoader.load("../textures/rrsign.jpg");
+        //const signTex = texLoader.load("../../CompSci559GP-5678/textures/rrsign.jpg");
         signTex.colorSpace = T.SRGBColorSpace;
         signTex.anisotropy = 16;
-        //const signTex = texLoader.load("../../CompSci559GP-5678/textures/rrsign.jpg");
         const group = new T.Group();
         group.rotateY(Math.PI / 2);
         group.position.set(-0.4, 0.1, -2.75);

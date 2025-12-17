@@ -618,9 +618,9 @@ export class grassRow extends GrObject {
   stepWorld(delta, timeOfDay, frozen, char) {
     // keep your same snapping motion
     if (this.objects[0].position.x < (this.x - 0.06)) {
-      this.objects[0].position.x += 0.2*delta*0.05;
+      this.objects[0].position.x += 0.2;
     } else if (this.objects[0].position.x > (this.x + 0.06)) {
-      this.objects[0].position.x -= 0.2*delta*0.05;
+      this.objects[0].position.x -= 0.2;
     }
 
     if (!frozen) {

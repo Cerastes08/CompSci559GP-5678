@@ -168,9 +168,9 @@ export class riverRow extends GrObject {
     stepWorld(delta, timeOfDay, frozen, char) {
         // same X-snapping logic as before
         if (this.objects[0].position.x < (this.x - 0.06)) {
-            this.objects[0].position.x += 0.2*delta*0.05;
+            this.objects[0].position.x += 0.2;
         } else if (this.objects[0].position.x > (this.x + 0.06)) {
-            this.objects[0].position.x -= 0.2*delta*0.05;
+            this.objects[0].position.x -= 0.2;
         }
 
         // Update water time, even if in prototype we won't see it

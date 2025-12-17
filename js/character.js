@@ -5,8 +5,8 @@ export class character extends GrObject {
     constructor() {
         const rabbit = new T.Group();
         rabbit.rotateY(Math.PI/2);
-        const furText = new T.TextureLoader().load("../textures/beastfur.png");
-        //const furText = new T.TextureLoader().load("../../CompSci559GP-5678/textures/beastfur.png");
+        //const furText = new T.TextureLoader().load("../textures/beastfur.png");
+        const furText = new T.TextureLoader().load("../../CompSci559GP-5678/textures/beastfur.png");
         const whiteMat = new T.MeshStandardMaterial({
           map: furText
         });
@@ -166,9 +166,9 @@ export class character extends GrObject {
 
 
         if (this.objects[0].position.z < (this.z - 0.06)) {
-            this.objects[0].position.z += 0.2*delta*0.05;
+            this.objects[0].position.z += 0.2;
         } else if (this.objects[0].position.z > (this.z + 0.06)) {
-            this.objects[0].position.z -= 0.2*delta*0.05;
+            this.objects[0].position.z -= 0.2;
         }
 
         if (!this.frozen) {

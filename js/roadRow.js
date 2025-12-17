@@ -252,9 +252,9 @@ export class roadRow extends GrObject {
   stepWorld(delta, timeOfDay, frozen, char) {
     // unchanged X snapping :contentReference[oaicite:3]{index=3}
     if (this.objects[0].position.x < (this.x - 0.06)) {
-      this.objects[0].position.x += 0.2*delta*0.05;
+      this.objects[0].position.x += 0.2;
     } else if (this.objects[0].position.x > (this.x + 0.06)) {
-      this.objects[0].position.x -= 0.2*delta*0.05;
+      this.objects[0].position.x -= 0.2;
     }
 
     // unchanged collision/removal logic :contentReference[oaicite:4]{index=4}

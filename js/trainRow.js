@@ -90,9 +90,9 @@ export class trainRow extends GrObject {
 
     stepWorld(delta, timeOfDay, frozen, char) {
         if (this.objects[0].position.x < (this.x - 0.06)) {
-            this.objects[0].position.x += 0.2*delta*0.05;
+            this.objects[0].position.x += 0.2;
         } else if (this.objects[0].position.x > (this.x + 0.06)) {
-            this.objects[0].position.x -= 0.2*delta*0.05;
+            this.objects[0].position.x -= 0.2;
         }
 
         if (Math.abs((this.train.objects[0].position.z + 4) - char.objects[0].position.z) < 6 &&
