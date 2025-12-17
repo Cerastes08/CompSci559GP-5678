@@ -37,6 +37,7 @@ document.addEventListener("keydown", (event) => {
         }
         if (keyName === "ArrowUp") {
             keydown = true;
+            char.startHop();
             let farthestRow = rowController1.rows[rowController1.rows.length - 1];
             let nearestRow = rowController1.rows[points + 5];
             char.objects[0].rotation.y = Math.PI / 2;
@@ -67,6 +68,7 @@ document.addEventListener("keydown", (event) => {
         }
         else if (keyName === "ArrowDown" && points > 0) {
             keydown = true;
+            char.startHop(); 
             let farthestRow = rowController1.rows[rowController1.rows.length - 1];
             let nearestRow = rowController1.rows[points + 3];
             char.objects[0].rotation.y = -Math.PI / 2;
@@ -84,6 +86,7 @@ document.addEventListener("keydown", (event) => {
         }
         else if (keyName === "ArrowRight") {
             keydown = true;
+            char.startHop(); 
             if (char.z > -4) {
                 char.z -= 1;
             }
@@ -96,6 +99,7 @@ document.addEventListener("keydown", (event) => {
         }
         else if (keyName === "ArrowLeft") {
             keydown = true;
+            char.startHop(); 
             if (char.z < 4) {
                 char.z += 1;
             }

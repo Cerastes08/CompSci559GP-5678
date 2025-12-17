@@ -1,15 +1,28 @@
 import * as T from "../libs/CS559-Three/build/three.module.js";
 import { GrObject } from "../libs/CS559-Framework/GrObject.js";
 
+
+
 export class trainWarning extends GrObject {
     constructor() {
+        const texLoader = new T.TextureLoader();
+        const signTex = texLoader.load("../textures/rrsign.jpg");
+        signTex.colorSpace = T.SRGBColorSpace;
+        signTex.anisotropy = 16;
+        //const signTex = texLoader.load("../../CompSci559GP-5678/textures/rrsign.jpg");
         const group = new T.Group();
         group.rotateY(Math.PI / 2);
         group.position.set(-0.4, 0.1, -2.75);
 
         /* MATERIALS */
         const poleMat = new T.MeshStandardMaterial({ color: 0xaaaaaa });
-        const signMat = new T.MeshStandardMaterial({ color: 0xffffff });
+        const signMat = new T.MeshStandardMaterial({
+            map: signTex,
+            color: 0xffffff,
+            side: T.DoubleSide,
+            roughness: 0.6,
+            metalness: 0.0
+        });
 
         const lightOnMat = new T.MeshStandardMaterial({
         color: 0xff0000,
@@ -101,39 +114,39 @@ export class trainWarning extends GrObject {
         base.position.y = -0.2;
         group.scale.setScalar(0.5);
         group.add(base);
-
+        
         super("RailroadSignal", group);
 
+        this.signTex = signTex;
+        this.signMat = signMat;
         this.leftLight = leftLight;
-        this.righttLight = rightLight;
+        this.rightLight = rightLight;
         this.lightOnMat = lightOnMat;
         this.lightOffMat = lightOffMat;
 
-        /*this.protoGeo = new T.CylinderGeometry(0.04, 0.04, 1, 32);
-        this.normalGeo = geometry;
-        this.protoMat = new T.MeshStandardMaterial({ color: 0xffffff });
-        this.normalMat = material;*/
     }
 
     activate() {
         this.leftLight.material = this.lightOnMat;
-        this.righttLight.material = this.lightOnMat;
+        this.rightLight.material = this.lightOnMat;
     }
 
     deactivate() {
         this.leftLight.material = this.lightOffMat;
-        this.righttLight.material = this.lightOffMat;
+        this.rightLight.material = this.lightOffMat;
     }
 
     stepWorld(delta, timeOfDay, frozen) {
-        if (!frozen) {
-            /*if (document.getElementById("prototype").checked) {
-                this.objects[0].geometry = this.protoGeo;
-                this.objects[0].material = this.protoMat;
-            } else {
-                this.objects[0].geometry = this.normalGeo;
-                this.objects[0].material = this.normalMat;
-            }*/
+        const protoBox = document.getElementById("prototype");
+        const proto = protoBox && protoBox.checked;
+
+        if (proto) {
+            this.signMat.map = null;
+        } else {
+            this.signMat.map = this.signTex;
         }
+
+        this.signMat.needsUpdate = true;
+
     }
 }

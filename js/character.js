@@ -5,7 +5,8 @@ export class character extends GrObject {
     constructor() {
         const rabbit = new T.Group();
         rabbit.rotateY(Math.PI/2);
-        const furText = new T.TextureLoader().load("../../CompSci559GP-5678/textures/beastfur.png");
+        const furText = new T.TextureLoader().load("../textures/beastfur.png");
+        //const furText = new T.TextureLoader().load("../../CompSci559GP-5678/textures/beastfur.png");
         const whiteMat = new T.MeshStandardMaterial({
           map: furText
         });
@@ -110,6 +111,18 @@ export class character extends GrObject {
 
         this.protoMat = new T.MeshStandardMaterial({ color: 0x5c5445 });
         this.normalMat = whiteMat;
+
+
+        this.baseY = this.objects[0].position.y;
+
+        this.lastPos = new T.Vector3();
+        this.objects[0].getWorldPosition(this.lastPos);
+
+        this.hopTime = 0;
+        this.hopDuration = 200; // ms
+        this.hopHeight = 0.25;
+        this.hopping = false;
+
     }
 
     moved() {
@@ -120,12 +133,37 @@ export class character extends GrObject {
         this.frozen = true;
     }
 
-    stepWorld(delta, timeOfDay) {
-        if (this.objects[0].position.y < this.y) {
-            this.objects[0].position.y += 0.1;
-        } else if (this.objects[0].position.y > this.y) {
-            this.objects[0].position.y = this.y;
+    startHop() {
+        if (!this.hopping) {
+            this.hopping = true;
+            this.hopTime = 0;
         }
+    }
+
+
+    stepWorld(delta, timeOfDay) {
+        const obj = this.objects[0];
+
+        // detect movement (any direction)
+        const currentPos = new T.Vector3();
+        obj.getWorldPosition(currentPos);
+
+        if (this.hopping) {
+          this.hopTime += delta;
+
+          const t = Math.min(this.hopTime / this.hopDuration, 1);
+
+          // smooth hop arc
+          const hopOffset = Math.sin(Math.PI * t) * this.hopHeight;
+          obj.position.y = this.baseY + hopOffset;
+
+          // land
+          if (t >= 1) {
+              this.hopping = false;
+              obj.position.y = this.baseY;
+          }
+      }
+
 
         if (this.objects[0].position.z < (this.z - 0.06)) {
             this.objects[0].position.z += 0.2*delta*0.05;
@@ -158,5 +196,10 @@ export class character extends GrObject {
               this.children[16].material = this.normalMat;
             }
         }
+      
+      this.lastPos.copy(currentPos);
     }
+
+
+
 }
